@@ -24,13 +24,10 @@ jobs:
 
       - name: install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
           cache: pnpm
 
       - name: biuld with VitePress
@@ -39,7 +36,7 @@ jobs:
           pnpm docs:build
           touch docs/.vitepress/dist/.nojekyll
 
-      - name: Configure GitHub Pages
+      - name: configure github pages
         uses: actions/configure-pages@v5.0.0
 
       - name: upload artifacts
