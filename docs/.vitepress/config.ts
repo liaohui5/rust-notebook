@@ -1,25 +1,31 @@
 import markdownItCheckBox from "markdown-it-todo-lists";
 import { defineConfig } from "vitepress";
-import sidebar from "./sidebar";
+import { genSidebarByNavs } from "./sidebar";
 
 const nav = [
   {
     text: "C 语言",
     link: "/clang/",
+    isAutoGenSidebar: true,
   },
   {
     text: "Rust 基础",
     link: "/rust/base/",
+    isAutoGenSidebar: true,
   },
   {
     text: "Rust 异步",
     link: "/rust/async/",
+    isAutoGenSidebar: true,
   },
   {
     text: "Rust 常用库",
     link: "/rust/libs/",
+    isAutoGenSidebar: true,
   },
 ];
+
+const sidebar = genSidebarByNavs(nav);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
