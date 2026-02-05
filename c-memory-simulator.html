@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>C语言指针与内存分配模拟器 (2026版)</title>
+    <style>
+      :root {
+        --cell-bg: #f0f0f0;
+        --cell-active: #e1f5fe;
+        --cell-border: #ccc;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        background: #fafafa;
+      }
+      .container {
+        display: flex;
+        gap: 20px;
+      }
+
+      /* 控制面板样式 */
+      .controls {
+        flex: 1;
+        background: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        height: fit-content;
+      }
+      .control-group {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px dotted #ccc;
+      }
+      input,
+      select,
+      button {
+        padding: 8px;
+        margin: 5px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button {
+        background: #2196f3;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #1976d2;
+      }
+      .log {
+        background: #333;
+        color: #0f0;
+        padding: 10px;
+        font-family: monospace;
+        height: 150px;
+        overflow-y: auto;
+        font-size: 12px;
+      }
+
+      /* 内存网格样式 */
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        gap: 4px;
+        width: 1200px;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+
+      .cell {
+        border: 1px solid var(--cell-border);
+        padding: 5px;
+        font-size: 11px;
+        min-height: 50px;
+        background: var(--cell-bg);
+        transition: all 0.3s;
+      }
+      .cell.occupied {
+        background: #bbdefb;
+        border-color: #2196f3;
+      }
+      .cell.pointer {
+        background: #c8e6c9;
+        border-color: #4caf50;
+      }
+      .addr {
+        color: #888;
+        font-weight: bold;
+        display: block;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 3px;
+      }
+      .var-name {
+        color: #d32f2f;
+        font-weight: bold;
+      }
+      .val-display {
+        color: #1976d2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>C语言指针与内存模型模拟器</h2>
+
+    <div class="container">
+      <!-- 操作面板 -->
+      <div class="controls">
+        <div class="control-group">
+          <label>1. 定义普通变量 (栈分配)</label>
+          <input type="text" id="varName" placeholder="变量名 (如: age)" />
+          <select id="varType">
+            <option value="1">char (1 Byte)</option>
+            <option value="2">short (2 Byte)</option>
+            <option value="4">int (4 Byte)</option>
+            <option value="8">long (8 Byte)</option>
+          </select>
+          <input type="number" id="varVal" placeholder="初始值" />
+          <button onclick="allocVariable()">分配内存</button>
+        </div>
+
+        <div class="control-group">
+          <label>2. 定义指针变量 (Pointer)</label>
+          <input type="text" id="ptrName" placeholder="指针名 (如: p_age)" />
+          <input type="text" id="targetVar" placeholder="指向的变量名" />
+          <button onclick="allocPointer()" style="background: #4caf50">
+            分配指针 (8 Bytes)
+          </button>
+        </div>
+
+        <div class="control-group">
+          <label>3. 解引用操作 (*ptr)</label>
+          <input type="text" id="derefName" placeholder="输入指针变量名" />
+          <input type="number" id="newVal" placeholder="通过指针修改值" />
+          <button
+            onclick="dereferenceGet()"
+            style="background: #ff9800; width: 48%"
+          >
+            获取值
+          </button>
+          <button
+            onclick="dereferenceSet()"
+            style="background: #f44336; width: 48%"
+          >
+            修改值
+          </button>
+        </div>
+
+        <div class="log" id="consoleLog">
+          系统就绪... 准备模拟 128 字节内存。
+        </div>
+      </div>
+
+      <!-- 内存空间 -->
+      <div id="memoryGrid" class="memory-grid"></div>
+    </div>
+
+    <script>
+      const MEM_SIZE = 512;
+      const memory = Array(MEM_SIZE)
+        .fill(null)
+        .map((_, i) => ({
+          addr: "0x" + i.toString(16).toUpperCase().padStart(2, "0"),
+          varName: "",
+          value: "",
+          isOccupied: false,
+          head: false, // 是否是变量的起始位置
+        }));
+
+      const variables = {}; // 存储变量元数据 { name: { addr, size, type } }
+
+      // 初始化内存视图
+      function initMemory() {
+        const grid = document.getElementById("memoryGrid");
+        grid.innerHTML = "";
+        memory.forEach((cell, index) => {
+          const div = document.createElement("div");
+          div.className = `cell ${cell.isOccupied ? "occupied" : ""} ${cell.type === "ptr" ? "pointer" : ""}`;
+          div.id = `cell-${index}`;
+          div.innerHTML = `
+                <span class="addr">${cell.addr}</span>
+                <span class="var-name">${cell.varName}</span><br>
+                <span class="val-display">${cell.value}</span>
+            `;
+          grid.appendChild(div);
+        });
+      }
+
+      function log(msg) {
+        const logDiv = document.getElementById("consoleLog");
+        logDiv.innerHTML += `> ${msg}<br>`;
+        logDiv.scrollTop = logDiv.scrollHeight;
+      }
+
+      // 寻找连续空闲内存
+      function findFreeSpace(size) {
+        for (let i = 0; i <= MEM_SIZE - size; i++) {
+          let space = true;
+          for (let j = 0; j < size; j++) {
+            if (memory[i + j].isOccupied) {
+              space = false;
+              break;
+            }
+          }
+          if (space) return i;
+        }
+        return -1;
+      }
+
+      // 分配普通变量
+      function allocVariable() {
+        const name = document.getElementById("varName").value;
+        const size = parseInt(document.getElementById("varType").value);
+        const val = document.getElementById("varVal").value;
+
+        if (!name || variables[name]) return alert("无效或重复的变量名");
+
+        const startIndex = findFreeSpace(size);
+        if (startIndex === -1) return alert("内存不足");
+
+        variables[name] = { addr: startIndex, size: size, type: "int" };
+
+        for (let i = 0; i < size; i++) {
+          memory[startIndex + i].isOccupied = true;
+          memory[startIndex + i].varName = i === 0 ? name : "";
+          memory[startIndex + i].value = i === 0 ? val : "..";
+          memory[startIndex + i].head = i === 0;
+        }
+
+        log(
+          `分配变量 ${name}: 地址 ${memory[startIndex].addr}, 长度 ${size} 字节`,
+        );
+        initMemory();
+      }
+
+      // 分配指针
+      function allocPointer() {
+        const pName = document.getElementById("ptrName").value;
+        const targetName = document.getElementById("targetVar").value;
+        const size = 8; // 模拟 64 位系统的指针长度
+
+        if (!variables[targetName]) return alert("目标变量不存在");
+
+        const startIndex = findFreeSpace(size);
+        if (startIndex === -1) return alert("内存不足");
+
+        const targetAddr = memory[variables[targetName].addr].addr;
+        variables[pName] = {
+          addr: startIndex,
+          size: size,
+          type: "ptr",
+          target: targetName,
+        };
+
+        for (let i = 0; i < size; i++) {
+          memory[startIndex + i].isOccupied = true;
+          memory[startIndex + i].type = "ptr";
+          memory[startIndex + i].varName = i === 0 ? pName : "";
+          memory[startIndex + i].value = i === 0 ? targetAddr : "..";
+        }
+
+        log(`分配指针 ${pName} -> ${targetName}: 存储地址值 ${targetAddr}`);
+        initMemory();
+      }
+
+      // 解引用获取值
+      function dereferenceGet() {
+        const pName = document.getElementById("derefName").value;
+        const ptr = variables[pName];
+        if (!ptr || ptr.type !== "ptr") return alert("非法的指针变量");
+
+        const targetVar = variables[ptr.target];
+        const val = memory[targetVar.addr].value;
+        log(
+          `解引用 *${pName}: 访问地址 ${memory[targetVar.addr].addr} 得到值 ${val}`,
+        );
+      }
+
+      // 解引用设置值
+      function dereferenceSet() {
+        const pName = document.getElementById("derefName").value;
+        const newVal = document.getElementById("newVal").value;
+        const ptr = variables[pName];
+
+        if (!ptr || ptr.type !== "ptr") return alert("非法的指针变量");
+
+        const targetVar = variables[ptr.target];
+        memory[targetVar.addr].value = newVal;
+
+        log(
+          `解引用 *${pName} = ${newVal}: 已修改地址 ${memory[targetVar.addr].addr} 的内容`,
+        );
+        initMemory();
+      }
+
+      initMemory();
+    </script>
+  </body>
+</html>
