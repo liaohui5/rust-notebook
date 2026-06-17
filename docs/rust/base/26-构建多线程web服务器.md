@@ -482,7 +482,7 @@ mod unit_tests {
 
 ### 分析
 
-![preview](https://raw.githubusercontent.com/liaohui5/images/main/images/202410181616699.png)
+![preview](https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/2026_06_18_fbabbfae443a6e4d71565c13a407142e.jpg)
 
 ### 创建项目
 

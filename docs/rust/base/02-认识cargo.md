@@ -134,9 +134,9 @@ pub fn search<'a>(query: &str, content: &'a str) -> Vec<&'a str> {
 2. 获取登录需要的 API token,  验证邮箱
 3. 登录 `cargo login $your_api_token_string`
 
-![crate-token](https://raw.githubusercontent.com/liaohui5/images/main/images/images202409111003762.png)
+![crate-token](https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/2026_06_18_007e1630dba71fe0967d03c07af4d5b4.jpg)
 
-![](https://raw.githubusercontent.com/liaohui5/images/main/images/images202409111040948.png)
+![](https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/2026_06_18_a29ae37e4acfba3a025093ac16694782.jpg)
 
 ####  设置 crate 的元数据
 
@@ -182,7 +182,7 @@ license = "MIT OR Apache-2.0"
 cargo publish
 ```
 
-![](https://raw.githubusercontent.com/liaohui5/images/main/images/images202409111048907.png)
+![](https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/2026_06_18_802e3c007edba3c56cd6a0cd901f207f.jpg)
 
 ## Cargo 工作空间
 
