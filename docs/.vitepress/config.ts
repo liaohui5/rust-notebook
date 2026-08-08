@@ -4,7 +4,7 @@ import { genSidebarByNavs } from "./sidebar";
 
 const nav = [
   {
-    text: "C 语言",
+    text: "C 语言基础",
     link: "/clang/",
     isAutoGenSidebar: true,
   },
@@ -14,13 +14,18 @@ const nav = [
     isAutoGenSidebar: true,
   },
   {
-    text: "Rust 异步",
-    link: "/rust/async/",
+    text: "内置标准库",
+    link: "/rust/stdlibs/",
     isAutoGenSidebar: true,
   },
   {
-    text: "Rust 常用库",
+    text: "常用开源库",
     link: "/rust/libs/",
+    isAutoGenSidebar: true,
+  },
+  {
+    text: "Rust 异步编程",
+    link: "/rust/async/",
     isAutoGenSidebar: true,
   },
 ];
