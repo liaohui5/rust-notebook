@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "notebook of study rust"
+  name: "Notebook for learning Rust"
   tagline: 好记性不如烂笔头
   actions:
     - theme: brand

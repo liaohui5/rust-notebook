@@ -35,8 +35,8 @@ const sidebar = genSidebarByNavs(nav);
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/",
-  title: "notebook of study rust",
-  description: "notebook of study rust",
+  title: "Rust",
+  description: "Notebook for learning Rust",
 
   head: [
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -72,9 +72,6 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
-    image: {
-      lazyLoading: true,
-    },
     config: (md) => {
       md.use(markdownItCheckBox);
     },
