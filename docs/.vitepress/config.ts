@@ -19,13 +19,13 @@ const nav = [
     isAutoGenSidebar: true,
   },
   {
-    text: "常用开源库",
-    link: "/rust/libs/",
+    text: "Rust 异步编程",
+    link: "/rust/async/",
     isAutoGenSidebar: true,
   },
   {
-    text: "Rust 异步编程",
-    link: "/rust/async/",
+    text: "常用开源库",
+    link: "/rust/libs/",
     isAutoGenSidebar: true,
   },
 ];
