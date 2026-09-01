@@ -14,7 +14,7 @@ const nav = [
     isAutoGenSidebar: true,
   },
   {
-    text: "内置标准库",
+    text: "Rust 标准库",
     link: "/rust/stdlibs/",
     isAutoGenSidebar: true,
   },
