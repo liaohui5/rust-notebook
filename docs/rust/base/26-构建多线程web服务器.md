@@ -521,16 +521,16 @@ cargo new mp-web-server
 ```html [public/index.html]
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h2>首页</h2>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>首页</h2>
+    <script src="index.js"></script>
+  </body>
 </html>
 ```
 
@@ -549,29 +549,29 @@ h2 {
 ```html [public/404.html]
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h2>NotFound</h2>
-  <a href="/">回到首页</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>NotFound</h2>
+    <a href="/">回到首页</a>
+  </body>
 </html>
 ```
 
 ```html [public/sleep.html]
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h2>测试多线程</h2>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>测试多线程</h2>
+  </body>
 </html>
 ```
 
@@ -658,7 +658,6 @@ fn handle_http_request<T: Read + Write>(stream: &mut T) {
     Router::route(request, stream);
 }
 ```
-
 
 ### src/request.rs
 
@@ -885,7 +884,6 @@ impl Router {
 ```
 
 ### src/handler.rs
-
 
 ```rust
 use crate::request;
