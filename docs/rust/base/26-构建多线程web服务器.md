@@ -478,7 +478,7 @@ mod unit_tests {
 
 ## 优化版(进阶练手项目)
 
-上面的处理方式太简单, 且耦合性太高, 所以需要优化, [在线代码](https://github.com/liaohui5/mp-web-server-write-in-rust)
+上面的处理方式太简单, 且耦合性太高, 所以需要优化, [在线代码](https://github.com/liaohui5/rust-mp-web-server)
 
 ### 分析
 
