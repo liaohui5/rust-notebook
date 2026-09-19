@@ -2,8 +2,11 @@
 layout: home
 
 hero:
-  name: "Notebook for learning Rust"
+  name: "Rust 学习笔记"
   tagline: 好记性不如烂笔头
+  image:
+    src: https://notebook-imgbed.s3.bitiful.net/rust.png?no-wait=on
+    alt: notebook
   actions:
     - theme: brand
       text: Rust

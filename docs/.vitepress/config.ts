@@ -36,12 +36,26 @@ const sidebar = genSidebarByNavs(nav);
 export default defineConfig({
   base: "/",
   title: "Rust",
-  description: "Notebook for learning Rust",
+  description: "Rust 学习笔记",
 
   head: [
-    ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    ["link", { rel: "icon", type: "image/png", href: "/logo.png" }],
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/favicon.ico?no-wait=on",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "https://notebook-imgbed.s3.bitiful.net/notebook-imgbed/logo.svg?no-wait=on",
+      },
+    ],
+
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "zh-CN" }],
     ["meta", { name: "og:site_name", content: "notebook" }],
