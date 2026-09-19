@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@nolebase/vitepress-plugin-enhanced-readabilities':
         specifier: ^2.18.2
-        version: 2.18.2(vitepress@2.0.0-alpha.20(sass@1.78.0))(vue@3.5.43)
+        version: 2.18.2(vitepress@2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0))(vue@3.5.43)
       markdown-it-todo-lists:
         specifier: ^0.1.8
         version: 0.1.8(markdown-it@14.3.2)
@@ -18,8 +18,8 @@ importers:
         specifier: 1.78.0
         version: 1.78.0
       vitepress:
-        specifier: ^2.0.0-alpha.20
-        version: 2.0.0-alpha.20(sass@1.78.0)
+        specifier: 2.0.0-alpha.19
+        version: 2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0)
 
 packages:
 
@@ -31,8 +31,8 @@ packages:
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.29.8':
-    resolution: {integrity: sha512-E8lTAYNB1KW+FH+VGJuZM1ioAx2E6oVlvQFRrf5P8ZZmsiJXYAD9vTFV7yyEURNzgh1dFqMZuO6tUwcARbqFCA==}
+  '@babel/parser@7.29.9':
+    resolution: {integrity: sha512-CjXrNHTnvqBVqHgdBysY3vk2T8tpJHb5/RMeHJBTyVa9xgugCB0CJTx/3oO8RV2QRQP391RWpB7D6hLjm8V9uA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -822,8 +822,8 @@ packages:
       yaml:
         optional: true
 
-  vitepress@2.0.0-alpha.20:
-    resolution: {integrity: sha512-uQWKmP9PaBkf9zxHn0iOml/ZPPDaGKqQXVMBHz3yjwyyd9Eg+BKLGxbqmOGlfOMCt6Fj8TLiAnE59qlKZ0A3xw==}
+  vitepress@2.0.0-alpha.19:
+    resolution: {integrity: sha512-WnBsb0Bwr43kXKyiis+lld/7ri3hnMbthS8N3hpFtjjwsdLO4IRmiAE08D7aud4q6oMDf9uwRowxzNqRFe/amw==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -851,7 +851,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.29.7': {}
 
-  '@babel/parser@7.29.8':
+  '@babel/parser@7.29.9':
     dependencies:
       '@babel/types': 7.29.8
 
@@ -886,22 +886,22 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
-  '@nolebase/ui@2.18.2(vitepress@2.0.0-alpha.20(sass@1.78.0))(vue@3.5.43)':
+  '@nolebase/ui@2.18.2(vitepress@2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0))(vue@3.5.43)':
     dependencies:
       '@iconify-json/octicon': 1.2.35
       less: 4.9.1
-      vitepress: 2.0.0-alpha.20(sass@1.78.0)
+      vitepress: 2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0)
       vue: 3.5.43
     transitivePeerDependencies:
       - supports-color
 
-  '@nolebase/vitepress-plugin-enhanced-readabilities@2.18.2(vitepress@2.0.0-alpha.20(sass@1.78.0))(vue@3.5.43)':
+  '@nolebase/vitepress-plugin-enhanced-readabilities@2.18.2(vitepress@2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0))(vue@3.5.43)':
     dependencies:
       '@iconify-json/carbon': 1.2.27
       '@iconify-json/icon-park-outline': 1.2.4
-      '@nolebase/ui': 2.18.2(vitepress@2.0.0-alpha.20(sass@1.78.0))(vue@3.5.43)
+      '@nolebase/ui': 2.18.2(vitepress@2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0))(vue@3.5.43)
       less: 4.9.1
-      vitepress: 2.0.0-alpha.20(sass@1.78.0)
+      vitepress: 2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0)
     transitivePeerDependencies:
       - supports-color
       - vue
@@ -1023,15 +1023,15 @@ snapshots:
 
   '@ungap/structured-clone@1.4.0': {}
 
-  '@vitejs/plugin-vue@6.0.9(vite@8.3.0(sass@1.78.0))(vue@3.5.43)':
+  '@vitejs/plugin-vue@6.0.9(vite@8.3.0(less@4.9.1)(sass@1.78.0))(vue@3.5.43)':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.3.0(sass@1.78.0)
+      vite: 8.3.0(less@4.9.1)(sass@1.78.0)
       vue: 3.5.43
 
   '@vue/compiler-core@3.5.43':
     dependencies:
-      '@babel/parser': 7.29.8
+      '@babel/parser': 7.29.9
       '@vue/shared': 3.5.43
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -1044,7 +1044,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.43':
     dependencies:
-      '@babel/parser': 7.29.8
+      '@babel/parser': 7.29.9
       '@vue/compiler-core': 3.5.43
       '@vue/compiler-dom': 3.5.43
       '@vue/compiler-ssr': 3.5.43
@@ -1576,7 +1576,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@8.3.0(sass@1.78.0):
+  vite@8.3.0(less@4.9.1)(sass@1.78.0):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -1585,17 +1585,20 @@ snapshots:
       tinyglobby: 0.2.17
     optionalDependencies:
       fsevents: 2.3.3
+      less: 4.9.1
       sass: 1.78.0
 
-  vitepress@2.0.0-alpha.20(sass@1.78.0):
+  vitepress@2.0.0-alpha.19(less@4.9.1)(postcss@8.5.28)(sass@1.78.0):
     dependencies:
       '@docsearch/css': 4.7.0
       '@docsearch/js': 4.7.0
       '@docsearch/sidepanel-js': 4.7.0
       '@iconify-json/simple-icons': 1.2.96
+      '@shikijs/core': 4.4.3
       '@shikijs/transformers': 4.4.3
+      '@shikijs/types': 4.4.3
       '@types/markdown-it': 14.2.0
-      '@vitejs/plugin-vue': 6.0.9(vite@8.3.0(sass@1.78.0))(vue@3.5.43)
+      '@vitejs/plugin-vue': 6.0.9(vite@8.3.0(less@4.9.1)(sass@1.78.0))(vue@3.5.43)
       '@vue/devtools-api': 8.2.1
       '@vue/shared': 3.5.43
       '@vueuse/core': 14.4.0(vue@3.5.43)
@@ -1604,8 +1607,10 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 7.2.0
       shiki: 4.4.3
-      vite: 8.3.0(sass@1.78.0)
+      vite: 8.3.0(less@4.9.1)(sass@1.78.0)
       vue: 3.5.43
+    optionalDependencies:
+      postcss: 8.5.28
     transitivePeerDependencies:
       - '@types/node'
       - '@vitejs/devtools'
